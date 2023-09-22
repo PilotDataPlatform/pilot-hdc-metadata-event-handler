@@ -1,0 +1,116 @@
+{
+  "entityDefs": [
+    {
+      "category": "ENTITY",
+      "createdBy": "atlas",
+      "updatedBy": "atlas",
+      "version": 1,
+      "name": "metadata_items",
+      "description": "basic file metadata entity",
+      "typeVersion": "1",
+      "serviceType": "hdfs_path",
+      "attributeDefs": [
+        {
+          "name": "file_name",
+          "typeName": "string",
+          "isOptional": false,
+          "cardinality": "SINGLE",
+          "valuesMinCount": 1,
+          "valuesMaxCount": 1,
+          "isUnique": true,
+          "isIndexable": true,
+          "includeInNotification": false,
+          "searchWeight": 10
+        },
+        {
+          "name": "item_id",
+          "typeName": "string",
+          "isOptional": true,
+          "cardinality": "SINGLE",
+          "valuesMinCount": 1,
+          "valuesMaxCount": 1,
+          "isUnique": true,
+          "isIndexable": true,
+          "includeInNotification": false,
+          "searchWeight": 10
+        },
+        {
+          "name": "archived",
+          "typeName": "boolean",
+          "isOptional": false,
+          "cardinality": "SINGLE",
+          "valuesMinCount": 1,
+          "valuesMaxCount": 1,
+          "isUnique": false,
+          "isIndexable": false,
+          "includeInNotification": false,
+          "searchWeight": 10
+        },
+        {
+          "name": "file_name",
+          "typeName": "string",
+          "isOptional": false,
+          "cardinality": "SINGLE",
+          "valuesMinCount": 1,
+          "valuesMaxCount": 1,
+          "isUnique": false,
+          "isIndexable": false,
+          "includeInNotification": false,
+          "searchWeight": 10
+        },
+        {
+          "name": "path",
+          "typeName": "string",
+          "isOptional": false,
+          "cardinality": "SINGLE",
+          "valuesMinCount": 1,
+          "valuesMaxCount": 1,
+          "isUnique": false,
+          "isIndexable": false,
+          "includeInNotification": false,
+          "searchWeight": 10
+        },
+        {
+          "name": "zone",
+          "typeName": "int",
+          "isOptional": false,
+          "cardinality": "SINGLE",
+          "valuesMinCount": 1,
+          "valuesMaxCount": 1,
+          "isUnique": false,
+          "isIndexable": false,
+          "includeInNotification": false,
+          "searchWeight": 10
+        },
+        {
+          "name": "container_code",
+          "typeName": "string",
+          "defaultValue": 0,
+          "isOptional": false,
+          "cardinality": "SINGLE",
+          "valuesMinCount": 1,
+          "valuesMaxCount": 1,
+          "isUnique": false,
+          "isIndexable": false,
+          "includeInNotification": false,
+          "searchWeight": 10
+        },
+        {
+          "name": "container_type",
+          "typeName": "string",
+          "isOptional": false,
+          "cardinality": "SINGLE",
+          "valuesMinCount": 1,
+          "valuesMaxCount": 1,
+          "isUnique": false,
+          "isIndexable": false,
+          "includeInNotification": false,
+          "searchWeight": 10
+        }
+      ],
+      "superTypes": ["DataSet"],
+      "subTypes": [],
+      "relationshipAttributeDefs": []
+    }
+  ]
+}
