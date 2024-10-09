@@ -1,9 +1,9 @@
-# Copyright (C) 2022-2023 Indoc Systems
+# Copyright (C) 2022-Present Indoc Systems
 #
-# Licensed under the GNU AFFERO GENERAL PUBLIC LICENSE, Version 3.0 (the "License") available at https://www.gnu.org/licenses/agpl-3.0.en.html.
+# Licensed under the GNU AFFERO GENERAL PUBLIC LICENSE,
+# Version 3.0 (the "License") available at https://www.gnu.org/licenses/agpl-3.0.en.html.
 # You may not use this file except in compliance with the License.
 
-import logging
 from typing import Any
 
 from elasticsearch import AsyncElasticsearch
@@ -11,8 +11,7 @@ from elasticsearch.helpers import async_scan
 
 from metadata_event_handler.app.routers.router_exceptions import UnhandledException
 from metadata_event_handler.config import ELASICSEARCH_PAGE_SIZE
-
-logger = logging.getLogger(__name__)
+from metadata_event_handler.logger import logger
 
 
 class ElasticsearchClient:

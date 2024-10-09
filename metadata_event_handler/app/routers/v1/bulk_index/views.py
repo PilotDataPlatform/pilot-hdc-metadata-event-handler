@@ -1,9 +1,8 @@
-# Copyright (C) 2022-2023 Indoc Systems
+# Copyright (C) 2022-Present Indoc Systems
 #
-# Licensed under the GNU AFFERO GENERAL PUBLIC LICENSE, Version 3.0 (the "License") available at https://www.gnu.org/licenses/agpl-3.0.en.html.
+# Licensed under the GNU AFFERO GENERAL PUBLIC LICENSE,
+# Version 3.0 (the "License") available at https://www.gnu.org/licenses/agpl-3.0.en.html.
 # You may not use this file except in compliance with the License.
-
-import logging
 
 from fastapi import APIRouter
 from fastapi import Depends
@@ -16,8 +15,7 @@ from metadata_event_handler.app.routers.router_exceptions import ItemsNotFoundEx
 from metadata_event_handler.app.routers.router_exceptions import UnhandledException
 from metadata_event_handler.app.routers.v1.bulk_index.crud import BulkIndexItems
 from metadata_event_handler.app.routers.v1.bulk_index.dependencies import get_bulk_index_crud
-
-logger = logging.getLogger(__name__)
+from metadata_event_handler.logger import logger
 
 router = APIRouter(prefix='/event-handler', tags=['Bulk Index'])
 

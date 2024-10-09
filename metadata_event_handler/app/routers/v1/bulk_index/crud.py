@@ -1,9 +1,9 @@
-# Copyright (C) 2022-2023 Indoc Systems
+# Copyright (C) 2022-Present Indoc Systems
 #
-# Licensed under the GNU AFFERO GENERAL PUBLIC LICENSE, Version 3.0 (the "License") available at https://www.gnu.org/licenses/agpl-3.0.en.html.
+# Licensed under the GNU AFFERO GENERAL PUBLIC LICENSE,
+# Version 3.0 (the "License") available at https://www.gnu.org/licenses/agpl-3.0.en.html.
 # You may not use this file except in compliance with the License.
 
-import logging
 from datetime import datetime
 from typing import Any
 
@@ -12,11 +12,10 @@ from metadata_event_handler.app.routers.v1.bulk_index.utils import get_items_mod
 from metadata_event_handler.clients.elasticsearch import ElasticsearchClient
 from metadata_event_handler.config import METADATA_SERVICE_PAGE_SIZE
 from metadata_event_handler.config import PROJECT_SERVICE_PAGE_SIZE
+from metadata_event_handler.logger import logger
 from metadata_event_handler.models.ESItemModel import ItemStatus
 from metadata_event_handler.services.metadata import MetadataService
 from metadata_event_handler.services.project import ProjectService
-
-logger = logging.getLogger(__name__)
 
 
 class BulkIndexItems:

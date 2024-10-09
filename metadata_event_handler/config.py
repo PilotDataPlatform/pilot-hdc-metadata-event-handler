@@ -1,9 +1,11 @@
-# Copyright (C) 2022-2023 Indoc Systems
+# Copyright (C) 2022-Present Indoc Systems
 #
-# Licensed under the GNU AFFERO GENERAL PUBLIC LICENSE, Version 3.0 (the "License") available at https://www.gnu.org/licenses/agpl-3.0.en.html.
+# Licensed under the GNU AFFERO GENERAL PUBLIC LICENSE,
+# Version 3.0 (the "License") available at https://www.gnu.org/licenses/agpl-3.0.en.html.
 # You may not use this file except in compliance with the License.
 
 import json
+import logging
 import os
 from distutils.util import strtobool
 from pathlib import Path
@@ -27,3 +29,5 @@ PROJECT_SERVICE_PAGE_SIZE = os.getenv('METADATA_SERVICE_PAGE_SIZE', 100)
 ELASICSEARCH_PAGE_SIZE = os.getenv('ELASICSEARCH_PAGE_SIZE', 50)
 CONSUMER_GROUP = os.getenv('CONSUMER_GROUP', 'metadata-event-handler')
 SEEK_TO_BEGINNING = bool(strtobool(os.getenv('SEEK_TO_BEGINNING', 'False')))
+LOGGING_LEVEL = int(os.getenv('LOGGING_LEVEL', logging.INFO))
+LOGGING_FORMAT = os.getenv('APP_NAME', 'json')

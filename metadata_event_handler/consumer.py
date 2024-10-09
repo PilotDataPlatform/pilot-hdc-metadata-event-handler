@@ -1,9 +1,9 @@
-# Copyright (C) 2022-2023 Indoc Systems
+# Copyright (C) 2022-Present Indoc Systems
 #
-# Licensed under the GNU AFFERO GENERAL PUBLIC LICENSE, Version 3.0 (the "License") available at https://www.gnu.org/licenses/agpl-3.0.en.html.
+# Licensed under the GNU AFFERO GENERAL PUBLIC LICENSE,
+# Version 3.0 (the "License") available at https://www.gnu.org/licenses/agpl-3.0.en.html.
 # You may not use this file except in compliance with the License.
 
-import logging
 from typing import Any
 from typing import Union
 
@@ -20,12 +20,11 @@ from metadata_event_handler.config import KAFKA_SERVICE
 from metadata_event_handler.config import KAFKA_TOPICS
 from metadata_event_handler.config import SEEK_TO_BEGINNING
 from metadata_event_handler.filtering import MetadataItemFacetFiltering
+from metadata_event_handler.logger import logger
 from metadata_event_handler.models import ESDatasetActivityModel
 from metadata_event_handler.models import ESItemActivityModel
 from metadata_event_handler.models import ESItemFacetModel
 from metadata_event_handler.models import ESItemModel
-
-logger = logging.getLogger(__name__)
 
 es_index = {
     ESItemModel: 'metadata-items',
