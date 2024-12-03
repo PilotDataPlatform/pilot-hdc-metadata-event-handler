@@ -9,6 +9,7 @@ import asyncio
 from common import configure_logging
 from fastapi import FastAPI
 
+from metadata_event_handler.app.components.health import health_router
 from metadata_event_handler.app.routers.v1.bulk_index.views import router as bulk_index_router
 from metadata_event_handler.config import LOGGING_FORMAT
 from metadata_event_handler.config import LOGGING_LEVEL
@@ -41,6 +42,8 @@ def create_app() -> FastAPI:
 
 def setup_routers(app: FastAPI) -> None:
     """Configure the application routers."""
+
+    app.include_router(health_router, prefix='/v1')
     app.include_router(bulk_index_router, prefix='/v1')
 
 

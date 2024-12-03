@@ -19,16 +19,13 @@ from metadata_event_handler.config import KAFKA_SCHEMAS_PATH
 from metadata_event_handler.config import KAFKA_SERVICE
 from metadata_event_handler.config import KAFKA_TOPICS
 from metadata_event_handler.config import SEEK_TO_BEGINNING
-from metadata_event_handler.filtering import MetadataItemFacetFiltering
 from metadata_event_handler.logger import logger
 from metadata_event_handler.models import ESDatasetActivityModel
 from metadata_event_handler.models import ESItemActivityModel
-from metadata_event_handler.models import ESItemFacetModel
 from metadata_event_handler.models import ESItemModel
 
 es_index = {
     ESItemModel: 'metadata-items',
-    ESItemFacetModel: 'metadata-items-facet',
     ESItemActivityModel: 'items-activity-logs',
     ESDatasetActivityModel: 'datasets-activity-logs',
 }
@@ -46,7 +43,7 @@ class MetadataConsumer(BaseConsumer):
         self.producer = None
 
     async def write_to_elasticsearch(
-        self, es_doc: Union[ESItemModel, ESItemFacetModel, ESItemActivityModel, ESDatasetActivityModel]
+        self, es_doc: Union[ESItemModel, ESItemActivityModel, ESDatasetActivityModel]
     ) -> None:
         logger.info('Writing to elasticsearch')
         doc = es_doc.to_dict()
@@ -88,13 +85,6 @@ class MetadataConsumer(BaseConsumer):
             else {}
         )
         await self.write_to_elasticsearch(es_item)
-
-        try:
-            filtering = MetadataItemFacetFiltering(message)
-            es_item_facet = filtering.apply()
-            await self.write_to_elasticsearch(es_item_facet)
-        except ValueError:
-            logger.exception('Item skipped with invalid format for faceted search')
 
     async def parse_item_activity_message(self, message: dict[str, Any]) -> None:
         item_id = message['item_id']

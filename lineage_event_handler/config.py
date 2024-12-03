@@ -33,7 +33,7 @@ class Settings(BaseSettings):
     """Store service configuration settings."""
 
     APP_NAME: str = 'lineage_consumer'
-    VERSION: str = '0.2.3'
+    VERSION: str = '1.0.3'
     LOGGING_LEVEL: int = logging.INFO
     LOGGING_FORMAT: str = 'json'
 

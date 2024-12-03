@@ -4,12 +4,8 @@
 # Version 3.0 (the "License") available at https://www.gnu.org/licenses/agpl-3.0.en.html.
 # You may not use this file except in compliance with the License.
 
-pytest_plugins = [
-    'tests.fixtures.clients.elasticsearch',
-    'tests.fixtures.services.metadata',
-    'tests.fixtures.services.project',
-    'tests.fixtures.event',
-    'tests.fixtures.fake',
-    'tests.fixtures.main',
-    'tests.fixtures.router_utils',
+from metadata_event_handler.app.components.health.views import router as health_router
+
+__all__ = [
+    'health_router',
 ]

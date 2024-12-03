@@ -19,9 +19,8 @@ class ElasticsearchClient:
         self.client = client
 
     async def insert_or_update_document(self, index: str, message: dict[str, Any]) -> None:
-        if index == 'metadata-items' or index == 'metadata-items-facet':
-            identifier = {'id': message['id']} if index == 'metadata-items' else {'identifier': message['identifier']}
-            search_es = await self.client.search(index=index, query={'match': identifier})
+        if index == 'metadata-items':
+            search_es = await self.client.search(index=index, query={'match': {'id': message['id']}})
             search_hits = search_es['hits']['total']['value']
             if not search_hits:
                 del message['to_delete']

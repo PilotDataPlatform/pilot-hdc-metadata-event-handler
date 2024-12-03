@@ -11,7 +11,6 @@ from uuid import UUID
 import pytest
 
 from metadata_event_handler.consumer import MetadataConsumer
-from metadata_event_handler.filtering import MetadataItemFacetFiltering
 from metadata_event_handler.models import ESDatasetActivityModel
 from metadata_event_handler.models import ESItemActivityModel
 from metadata_event_handler.models import ESItemModel
@@ -94,11 +93,8 @@ class TestMetadataConsumer:
         expected_metadata_item.attributes = metadata_item_event_payload['extended']['extra']['attributes'][
             str(template_pk)
         ]
-        filtered_metadata = MetadataItemFacetFiltering(metadata_item_event_payload)
-        expected_filtered_metadata_item = [('metadata-items-facet', filtered_metadata.apply().to_dict())]
         expected_documents = [('metadata-items', expected_metadata_item.to_dict())]
-        assert elasticsearch_client.documents[0] == expected_documents[0]
-        assert elasticsearch_client.documents[1] == expected_filtered_metadata_item[0]
+        assert elasticsearch_client.documents == expected_documents
 
     async def test_process_event_parses_item_activity_event_structure_and_writes_into_elasticsearch(
         self, elasticsearch_client, metadata_consumer, event_factory, fake

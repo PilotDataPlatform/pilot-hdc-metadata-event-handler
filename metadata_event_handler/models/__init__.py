@@ -6,7 +6,10 @@
 
 from metadata_event_handler.models.ESDatasetActivityModel import ESDatasetActivityModel
 from metadata_event_handler.models.ESItemActivityModel import ESItemActivityModel
-from metadata_event_handler.models.ESItemFacetModel import ESItemFacetModel
 from metadata_event_handler.models.ESItemModel import ESItemModel
 
-__all__ = ['ESDatasetActivityModel', 'ESItemActivityModel', 'ESItemModel', 'ESItemFacetModel']
+__all__ = [
+    'ESDatasetActivityModel',
+    'ESItemActivityModel',
+    'ESItemModel',
+]

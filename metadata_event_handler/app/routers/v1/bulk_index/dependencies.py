@@ -4,25 +4,15 @@
 # Version 3.0 (the "License") available at https://www.gnu.org/licenses/agpl-3.0.en.html.
 # You may not use this file except in compliance with the License.
 
-from elasticsearch import AsyncElasticsearch
 from fastapi import Depends
 
+from metadata_event_handler.app.dependencies import get_elasticsearch_client
 from metadata_event_handler.app.routers.v1.bulk_index.crud import BulkIndexItems
 from metadata_event_handler.clients.elasticsearch import ElasticsearchClient
-from metadata_event_handler.config import ELASTICSEARCH_SERVICE
 from metadata_event_handler.config import METADATA_SERVICE
 from metadata_event_handler.config import PROJECT_SERVICE
 from metadata_event_handler.services.metadata import MetadataService
 from metadata_event_handler.services.project import ProjectService
-
-
-async def get_elasticsearch_client() -> ElasticsearchClient:
-    """Create a callable dependency for Elasticsearch client instance."""
-    client = ElasticsearchClient(AsyncElasticsearch(ELASTICSEARCH_SERVICE))
-    try:
-        yield client
-    finally:
-        await client.close()
 
 
 def get_metadata_service() -> MetadataService:

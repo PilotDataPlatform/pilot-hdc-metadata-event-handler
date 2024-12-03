@@ -48,12 +48,6 @@ class TestElasticsearchClient:
             mock.assert_called_with(index='metadata-items', query={'match': {'id': 'items_id'}})
 
             await es_client.insert_or_update_document(
-                index='metadata-items-facet', message={'identifier': 'facet_idnetifier', 'to_delete': False}
-            )
-            assert mock.call_count == 2
-            mock.assert_called_with(index='metadata-items-facet', query={'match': {'identifier': 'facet_idnetifier'}})
-
-            await es_client.insert_or_update_document(
                 index='metadata-items-activity', message={'id': 'activity_id', 'to_delete': False}
             )
-            assert mock.call_count == 2
+            assert mock.call_count == 1
