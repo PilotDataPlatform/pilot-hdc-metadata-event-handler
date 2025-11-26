@@ -1,12 +1,12 @@
 [tool.poetry]
 name = "lineage_event_handler"
-version = "1.0.3"
+version = "1.0.7"
 description = "Consumes Metadata events and writes into ElasticSearch"
 authors = ["Indoc Research"]
 
 [tool.poetry.dependencies]
-python = "^3.9"
-fastavro = "1.5.2"
+python = ">=3.10,<3.11"
+fastavro = "1.10.0"
 aiokafka = "0.7.2"
 elasticsearch = { extras = ["async"], version = "7.17.4" }
 python-dotenv = "0.19.1"

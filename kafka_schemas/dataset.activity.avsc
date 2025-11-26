@@ -11,8 +11,8 @@
       "name": "version",
       "default": null,
       "type": [
-        "string",
-        "null"
+        "null",
+        "string"
       ]
     },
     {
@@ -22,8 +22,8 @@
     {
       "name": "target_name",
       "type": [
-        "string",
-        "null"
+        "null",
+        "string"
       ]
     },
     {
@@ -46,6 +46,10 @@
           "values": "string"
         }
       }
+    },
+    {
+      "name": "network_origin",
+      "type": "string"
     }
   ]
 }

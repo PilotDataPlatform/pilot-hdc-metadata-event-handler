@@ -38,7 +38,7 @@ class LineageConsumer(BaseConsumer):
 
             if response.status_code == 404:
                 logger.warning(f"Entity {ConfigClass.ATLAS_ENTITY_TYPE} doesn't exist. Creating a new type.")
-                entity_def_file = open(ConfigClass.ATLAS_ENTITY_DIR / f'{ConfigClass.ATLAS_ENTITY_TYPE}.json', 'r')
+                entity_def_file = open(ConfigClass.ATLAS_ENTITY_DIR / f'{ConfigClass.ATLAS_ENTITY_TYPE}.json')
                 entity_def = json.loads(entity_def_file.read())
 
                 response = client.post(
