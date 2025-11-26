@@ -14,6 +14,7 @@ class ESDatasetActivityModel:
         self.target_name = ''
         self.version = ''
         self.changes = []
+        self.network_origin = ''
 
     def to_dict(self) -> dict:
         return {
@@ -24,4 +25,5 @@ class ESDatasetActivityModel:
             'target_name': self.target_name,
             'version': self.version,
             'changes': self.changes,
+            'network_origin': self.network_origin,
         }

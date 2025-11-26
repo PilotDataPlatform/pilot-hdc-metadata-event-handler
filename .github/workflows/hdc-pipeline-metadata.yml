@@ -1,0 +1,48 @@
+name: HDC ci/cd pipeline metadata
+
+permissions:
+  contents: write
+  issues: write
+  pull-requests: write
+
+on:
+  push:
+    branches:
+      - main
+    paths:
+      - 'metadata_event_handler/**'
+      - 'commons/**'
+  pull_request:
+    branches:
+      - main
+    paths:
+      - 'metadata_event_handler/**'
+      - 'commons/**'
+
+jobs:
+  run_tests_hdc:
+    uses: PilotDataPlatform/pilot-hdc-ci-tools/.github/workflows/run_tests.yml@main
+    with:
+      min_coverage_percent: 79
+      python_version: "3.10.4"
+      coverage_target: "metadata_event_handler"
+      additional_configuration_commands: "cp -r ./kafka_schemas ./metadata_event_handler"
+    secrets: inherit
+
+  build_and_publish_hdc:
+    needs: [run_tests_hdc]
+    uses: PilotDataPlatform/pilot-hdc-ci-tools/.github/workflows/build_and_publish.yml@main
+    with:
+      matrix_config: '["metadata_event_handler"]'
+      service_name: 'metadata_event_handler'
+      path_to_dockerfile: './metadata_event_handler/Dockerfile'
+      path_to_pyproject: './metadata_event_handler/pyproject.toml'
+    secrets: inherit
+
+  deploy_hdc:
+    needs: [build_and_publish_hdc]
+    uses: PilotDataPlatform/pilot-hdc-ci-tools/.github/workflows/trigger_deployment.yml@main
+    with:
+      hdc_service_name: 'metadata-event-handler'
+      pyproject_folder: 'metadata_event_handler'
+    secrets: inherit

@@ -5,7 +5,6 @@
 # You may not use this file except in compliance with the License.
 
 from typing import Any
-from typing import Union
 
 from aiokafka import AIOKafkaConsumer
 from aiokafka import AIOKafkaProducer
@@ -42,9 +41,7 @@ class MetadataConsumer(BaseConsumer):
         self.consumer = None
         self.producer = None
 
-    async def write_to_elasticsearch(
-        self, es_doc: Union[ESItemModel, ESItemActivityModel, ESDatasetActivityModel]
-    ) -> None:
+    async def write_to_elasticsearch(self, es_doc: ESItemModel | ESItemActivityModel | ESDatasetActivityModel) -> None:
         logger.info('Writing to elasticsearch')
         doc = es_doc.to_dict()
         index = es_index[type(es_doc)]
@@ -102,6 +99,7 @@ class MetadataConsumer(BaseConsumer):
         es_item.user = message['user']
         es_item.imported_from = message['imported_from']
         es_item.changes = message['changes']
+        es_item.network_origin = message['network_origin']
         await self.write_to_elasticsearch(es_item)
 
     async def parse_dataset_activity_message(self, message: dict[str, Any]) -> None:
@@ -113,6 +111,7 @@ class MetadataConsumer(BaseConsumer):
         es_dataset.version = message['version']
         es_dataset.user = message['user']
         es_dataset.changes = message['changes']
+        es_dataset.network_origin = message['network_origin']
         await self.write_to_elasticsearch(es_dataset)
 
     async def process_topic_message(self, topic: str, message: dict[str, Any]) -> None:

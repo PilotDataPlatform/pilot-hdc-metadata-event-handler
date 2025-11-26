@@ -1,0 +1,46 @@
+name: HDC ci/cd pipeline lineage
+
+permissions:
+  contents: write
+  issues: write
+  pull-requests: write
+
+on:
+  push:
+    branches:
+      - main
+    paths:
+      - 'lineage_event_handler/**'
+      - 'commons/**'
+  pull_request:
+    branches:
+      - main
+    paths:
+      - 'lineage_event_handler/**'
+      - 'commons/**'
+
+jobs:
+  #  lineage event handler doesn't have tests
+  #  run_tests_hdc:
+  #    uses: PilotDataPlatform/pilot-hdc-ci-tools/.github/workflows/run_tests.yml@main
+  #    with:
+  #      min_coverage_percent: 0
+  #    secrets: inherit
+
+  build_and_publish_hdc:
+  #  needs: [run_tests_hdc]
+    uses: PilotDataPlatform/pilot-hdc-ci-tools/.github/workflows/build_and_publish.yml@main
+    with:
+      matrix_config: '["lineage_event_handler"]'
+      service_name: 'lineage_event_handler'
+      path_to_dockerfile: './lineage_event_handler/Dockerfile'
+      path_to_pyproject: './lineage_event_handler/pyproject.toml'
+    secrets: inherit
+
+  deploy_hdc:
+    needs: [build_and_publish_hdc]
+    uses: PilotDataPlatform/pilot-hdc-ci-tools/.github/workflows/trigger_deployment.yml@main
+    with:
+      hdc_service_name: 'lineage-event-handler'
+      pyproject_folder: 'lineage_event_handler'
+    secrets: inherit

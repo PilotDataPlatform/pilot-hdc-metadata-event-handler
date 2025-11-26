@@ -19,6 +19,7 @@ class ESItemActivityModel:
         self.user = ''
         self.imported_from = ''
         self.changes = []
+        self.network_origin = ''
 
     def to_dict(self) -> dict:
         return {
@@ -34,4 +35,5 @@ class ESItemActivityModel:
             'user': self.user,
             'imported_from': self.imported_from,
             'changes': self.changes,
+            'network_origin': self.network_origin,
         }

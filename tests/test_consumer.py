@@ -19,7 +19,7 @@ from metadata_event_handler.models.ESItemModel import ItemStatus
 
 @pytest.fixture
 def metadata_consumer(elasticsearch_client) -> MetadataConsumer:
-    yield MetadataConsumer(elasticsearch_client)
+    return MetadataConsumer(elasticsearch_client)
 
 
 class TestMetadataConsumer:
@@ -112,6 +112,7 @@ class TestMetadataConsumer:
             'activity_type': 'upload',
             'activity_time': datetime.now(tz=timezone.utc).replace(microsecond=0),
             'changes': [],
+            'network_origin': 'internal',
         }
         item_activity_event = event_factory.generate_item_activity_event_v1(item_activity_event_payload)
         await metadata_consumer.process_event(item_activity_event)
@@ -131,6 +132,7 @@ class TestMetadataConsumer:
         expected_item_activity.user = item_activity_event_payload['user']
         expected_item_activity.imported_from = item_activity_event_payload['imported_from']
         expected_item_activity.changes = item_activity_event_payload['changes']
+        expected_item_activity.network_origin = item_activity_event_payload['network_origin']
 
         expected_documents = [('items-activity-logs', expected_item_activity.to_dict())]
 
@@ -147,6 +149,7 @@ class TestMetadataConsumer:
             'activity_type': 'download',
             'activity_time': datetime.now(tz=timezone.utc).replace(microsecond=0),
             'changes': [],
+            'network_origin': 'internal',
         }
         dataset_activity_event = event_factory.generate_dataset_activity_event_v1(dataset_activity_event_payload)
         await metadata_consumer.process_event(dataset_activity_event)
@@ -161,6 +164,7 @@ class TestMetadataConsumer:
         expected_dataset_activity.target_name = dataset_activity_event_payload['target_name']
         expected_dataset_activity.version = dataset_activity_event_payload['version']
         expected_dataset_activity.changes = dataset_activity_event_payload['changes']
+        expected_dataset_activity.network_origin = dataset_activity_event_payload['network_origin']
 
         expected_documents = [('datasets-activity-logs', expected_dataset_activity.to_dict())]
 
