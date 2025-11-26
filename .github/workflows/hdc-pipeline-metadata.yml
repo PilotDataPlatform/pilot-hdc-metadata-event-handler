@@ -46,4 +46,3 @@ jobs:
       hdc_service_name: 'metadata-event-handler'
       pyproject_folder: 'metadata_event_handler'
     secrets: inherit
-

@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "lineage_event_handler"
-version = "1.0.7"
+version = "1.0.8"
 description = "Consumes Metadata events and writes into ElasticSearch"
 authors = ["Indoc Research"]
 
