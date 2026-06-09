@@ -30,7 +30,6 @@ class Settings(BaseSettings):
     KAFKA_GROUP_ID: str
 
     KAFKA_SCHEMAS_PATH = Path(__file__).parent / 'kafka_schemas'
-    ELASTICSEARCH_SERVICE: str
 
     SEEK_TO_BEGINNING: bool = False
 
